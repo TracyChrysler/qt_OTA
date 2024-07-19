@@ -1,0 +1,22 @@
+# Ignore build directories
+build-*/
+debug/
+release/
+
+# Ignore user-specific files
+*.user
+*.pro.user
+*.qmake.stash
+*.qmake.cache
+
+# Ignore Qt Creator specific files
+.DS_Store
+.idea/
+.vscode/
+*.autosave
+*.swp
+*.pro.user.*
+*.lpro
+*.qmlc
+*.jsc
+*~
