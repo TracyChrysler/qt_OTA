@@ -5,6 +5,7 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QSettings>
+#include <QComboBox>
 
 #define CONFIG_FILE "D:\\documents\\qt\\qt\\OTA_finally\\config.ini"
 QT_BEGIN_NAMESPACE
@@ -18,6 +19,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    int setComboxDefalutIndex(QComboBox *combox, const QString &str);
 
 private slots:
     void on_browseButton_clicked();

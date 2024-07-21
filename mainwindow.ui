@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>OTA</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="horizontalLayoutWidget">
@@ -198,12 +198,6 @@
      <height>26</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuOTA">
-    <property name="title">
-     <string>OTA</string>
-    </property>
-   </widget>
-   <addaction name="menuOTA"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
