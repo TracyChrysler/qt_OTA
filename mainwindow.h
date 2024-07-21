@@ -4,8 +4,9 @@
 #include <QMainWindow>
 #include <QSerialPort>
 #include <QSerialPortInfo>
+#include <QSettings>
 
-
+#define CONFIG_FILE "D:\\documents\\qt\\qt\\OTA_finally\\config.ini"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -23,5 +24,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QSerialPort *serial;
+    QSettings *configSerial;
 };
 #endif // MAINWINDOW_H

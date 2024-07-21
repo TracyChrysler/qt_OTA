@@ -11,11 +11,31 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    QList<QSerialPortInfo> list = QSerialPortInfo::availablePorts();
+    for(int i = 0; i<list.size(); i++)
+    {
+        ui->comBoxSerialPort->addItem(list.at(i).portName());
+    }
+
+    serial = new QSerialPort;
+    configSerial = new QSettings(CONFIG_FILE, QSettings::IniFormat);
+    QString dataBits = configSerial->value("/defaultSerialConfig/dataBits").toString();
+    ui->comBoxDataBits->addItem(dataBits);
+    QString parity = configSerial->value("/defaultSerialConfig/parity").toString();
+    ui->comBoxParity->addItem(parity);
+    QString stopBits = configSerial->value("/defaultSerialConfig/stopBits").toString();
+    ui->comBoxStopBits->addItem(stopBits);
+    QString flowControl = configSerial->value("/defaultSerialConfig/flowControl").toString();
+    ui->comBoxFlowControl->addItem(flowControl);
+    QString baudRate = configSerial->value("/defaultSerialConfig/baudRate").toString();
+    ui->comBoxSpeed->addItem(baudRate);
 
 }
 
 MainWindow::~MainWindow()
 {
+    delete configSerial;
+    delete serial;
     delete ui;
 }
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>723</width>
-    <height>322</height>
+    <height>368</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -95,13 +95,13 @@
      <string>开始升级</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>40</x>
       <y>50</y>
-      <width>196</width>
-      <height>165</height>
+      <width>202</width>
+      <height>171</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -163,7 +163,7 @@
         <widget class="QComboBox" name="comBoxParity"/>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox_6"/>
+        <widget class="QComboBox" name="comBoxStopBits"/>
        </item>
        <item>
         <widget class="QComboBox" name="comBoxFlowControl"/>
@@ -174,6 +174,19 @@
       </layout>
      </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="configApply">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>240</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Apply</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
