@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>740</width>
-    <height>611</height>
+    <width>723</width>
+    <height>322</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>70</y>
-      <width>614</width>
+      <x>280</x>
+      <y>50</y>
+      <width>401</width>
       <height>32</height>
      </rect>
     </property>
@@ -53,13 +53,13 @@
       <widget class="QPushButton" name="browseButton">
        <property name="minimumSize">
         <size>
-         <width>150</width>
+         <width>80</width>
          <height>30</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>150</width>
+         <width>80</width>
          <height>30</height>
         </size>
        </property>
@@ -68,60 +68,110 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QPushButton" name="sendButton">
-       <property name="minimumSize">
-        <size>
-         <width>150</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>150</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>发送数据</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </widget>
-   <widget class="QTextBrowser" name="fileContent">
+   <widget class="QPushButton" name="startButton">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>120</y>
-      <width>611</width>
-      <height>351</height>
+      <x>600</x>
+      <y>100</y>
+      <width>80</width>
+      <height>30</height>
      </rect>
     </property>
+    <property name="minimumSize">
+     <size>
+      <width>80</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>80</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>开始升级</string>
+    </property>
    </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>30</y>
-      <width>611</width>
-      <height>31</height>
+      <x>40</x>
+      <y>50</y>
+      <width>196</width>
+      <height>165</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QPushButton" name="stopButton">
-       <property name="text">
-        <string>升级结束</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Serial port</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Data bits</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Parity</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Stop bits</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Flow control</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Speed</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QPushButton" name="startButton">
-       <property name="text">
-        <string>开始升级</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QComboBox" name="comBoxSerialPort"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comBoxDataBits"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comBoxParity"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_6"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comBoxFlowControl"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comBoxSpeed"/>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
@@ -131,8 +181,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>740</width>
-     <height>23</height>
+     <width>723</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuOTA">
