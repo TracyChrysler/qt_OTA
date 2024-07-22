@@ -23,6 +23,7 @@ public:
 
 private slots:
     void on_browseButton_clicked();
+    void on_configApply_clicked();
 
 private:
     Ui::MainWindow *ui;
