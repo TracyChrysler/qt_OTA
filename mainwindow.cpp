@@ -201,4 +201,13 @@ void MainWindow::on_configApply_clicked()
     } else {
         QMessageBox::critical(this, tr("error"), tr("Cannot set flowcontrol!"));
     }
+    // Set serialBaudRate
+    int baudRate = ui->comBoxSpeed->currentData().toInt();
+    qDebug() << "baudRate is:" << baudRate;
+
+    if (serial->setBaudRate(baudRate)) {
+        qDebug() << "baudRate has been set:" << baudRate;
+    } else {
+        QMessageBox::critical(this, tr("error"), tr("Cannot set baudRate!"));
+    }
 }
