@@ -23,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    int index;
     ui->setupUi(this);
 
     QList<QSerialPortInfo> list = QSerialPortInfo::availablePorts();
@@ -41,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     {
         ui->comBoxDataBits->addItem(QString::number(5 + i));
     }
-    QString dataBits = configSerial->value("/defaultSerialConfig/dataBits").toString();
+    QString dataBits = configSerial->value(DEFAULT_SERIAL_SECTION_NAME"dataBits").toString();
     setComboxDefalutIndex(ui->comBoxDataBits, dataBits);
 
     // Set parity list
@@ -49,13 +48,13 @@ MainWindow::MainWindow(QWidget *parent)
     for (int i = 0; i < 5; ++i) {
         ui->comBoxParity->addItem(parityList[i]);
     }
-    QString parity = configSerial->value("/defaultSerialConfig/parity").toString();
+    QString parity = configSerial->value(DEFAULT_SERIAL_SECTION_NAME"parity").toString();
     setComboxDefalutIndex(ui->comBoxParity, parity);
 
     // Set stop bits list
     ui->comBoxStopBits->addItem("1");
     ui->comBoxStopBits->addItem("2");
-    QString stopBits = configSerial->value("/defaultSerialConfig/stopBits").toString();
+    QString stopBits = configSerial->value(DEFAULT_SERIAL_SECTION_NAME"stopBits").toString();
     setComboxDefalutIndex(ui->comBoxStopBits, stopBits);
 
     // Set flow control list
@@ -63,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
     for (int i = 0; i < 4; ++i) {
         ui->comBoxFlowControl->addItem(flowControlList[i]);
     }
-    QString flowControl = configSerial->value("/defaultSerialConfig/flowControl").toString();
+    QString flowControl = configSerial->value(DEFAULT_SERIAL_SECTION_NAME"flowControl").toString();
     setComboxDefalutIndex(ui->comBoxFlowControl,flowControl );
 
     // Set speed list
@@ -71,7 +70,7 @@ MainWindow::MainWindow(QWidget *parent)
     for (int i = 0; i < 11; ++i) {
         ui->comBoxSpeed->addItem(speedList[i]);
     }
-    QString baudRate = configSerial->value("/defaultSerialConfig/baudRate").toString();
+    QString baudRate = configSerial->value(DEFAULT_SERIAL_SECTION_NAME"baudRate").toString();
     setComboxDefalutIndex(ui->comBoxSpeed, baudRate);
 }
 
@@ -104,4 +103,44 @@ void MainWindow::on_browseButton_clicked()
 //    ui->fileContent->setPlainText(fileContent);
 
 //    file.close();
+}
+
+void MainWindow::on_configApply_clicked()
+{
+    QString strDataBit =ui->comBoxDataBits->currentText();
+    QString strParit =ui->comBoxParity->currentText();
+    QString strStopBit =ui->comBoxStopBits->currentText();
+    QString strFlowControl =ui->comBoxFlowControl->currentText();
+    QString strSpeed =ui->comBoxSpeed->currentText();
+    qDebug() << "strDataBit:" << strDataBit;
+    qDebug() << "strParit:" << strParit;
+    qDebug() << "strStopBit:" << strStopBit;
+    qDebug() << "strFlowControl:" << strFlowControl;
+    qDebug() << "strSpeed:" << strSpeed;
+    configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"dataBits", strDataBit);
+    configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"parity", strParit);
+    configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"stopBit", strStopBit);
+    configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"flowControl", strFlowControl);
+    configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"baudRate", strSpeed);
+}
+
+void MainWindow::on_startButton_clicked()
+{
+    /* Set serial parameters */
+
+    /* Open firmware file */
+
+    /* Read data from firmware */
+
+    /* Send cmd(0x1A) to start upgrade */
+
+    /* Read reply of starting cmd */
+
+    /* Judge if rc euqal to zero, if not, send start cmd agin.
+     * If you haven't received a zero return value in more than one minute,
+     * then, terminate the upgrade process.*/
+
+    /* Send cmd(0x1B) to transfer firmware data */
+
+    /* Send cmd(0x1C) to finish upgrade process */
 }
