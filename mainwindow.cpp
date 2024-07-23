@@ -278,7 +278,16 @@ void MainWindow::on_startButton_clicked()
     qDebug() << "baudRate:" << serial->baudRate();
 
     // Open serial port
-    serial->open(QIODevice::ReadWrite);
+    if(!serial->open(QIODevice::ReadWrite))
+        qDebug() << "open serial port fialed" << endl;
+    else
+        qDebug() << "open serial port success" << endl;
+
+    writeSerialData("yhz hello world", 11);
+
+    return;
+
+    serial->close();
 
     /* Open firmware file */
     QString filePath = ui->documentPath->text();
