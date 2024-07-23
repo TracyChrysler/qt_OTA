@@ -141,7 +141,95 @@ void MainWindow::on_configApply_clicked()
 void MainWindow::on_startButton_clicked()
 {
     /* Set serial parameters */
+    // dataBits
+    if(ui->comBoxDataBits->currentText() == "5")
+    {
+        serial->setDataBits(QSerialPort::Data5);
+    }
+    else if (ui->comBoxDataBits->currentText() == "6")
+    {
+        serial->setDataBits(QSerialPort::Data6);
+    }
+    else if (ui->comBoxDataBits->currentText() == "7")
+    {
+        serial->setDataBits(QSerialPort::Data7);
+    }
+    else if (ui->comBoxDataBits->currentText() == "8")
+    {
+        serial->setDataBits(QSerialPort::Data8);
+    }
 
+    // parity
+    if(ui->comBoxParity->currentText() == "")
+    {
+        serial->(::);
+    }
+    else if (ui->comBoxParity->currentText() == "")
+    {
+        serial->(::);
+    }
+    else if (ui->comBoxParity->currentText() == "")
+    {
+        serial->(::);
+    }
+    else if (ui->comBoxParity->currentText() == "")
+    {
+        serial->(::);
+    }
+
+    // parity
+    if(ui->->currentText() == "")
+    {
+        serial->(::);
+    }
+    else if (ui->->currentText() == "")
+    {
+        serial->(::);
+    }
+    else if (ui->->currentText() == "")
+    {
+        serial->(::);
+    }
+    else if (ui->->currentText() == "")
+    {
+        serial->(::);
+    }
+
+    // parity
+    if(ui->->currentText() == "")
+    {
+        serial->(::);
+    }
+    else if (ui->->currentText() == "")
+    {
+        serial->(::);
+    }
+    else if (ui->->currentText() == "")
+    {
+        serial->(::);
+    }
+    else if (ui->->currentText() == "")
+    {
+        serial->(::);
+    }
+
+    // parity
+    if(ui->->currentText() == "")
+    {
+        serial->(::);
+    }
+    else if (ui->->currentText() == "")
+    {
+        serial->(::);
+    }
+    else if (ui->->currentText() == "")
+    {
+        serial->(::);
+    }
+    else if (ui->->currentText() == "")
+    {
+        serial->(::);
+    }
     /* Open firmware file */
 
     /* Read data from firmware */
