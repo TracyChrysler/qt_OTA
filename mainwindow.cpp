@@ -408,4 +408,3 @@ void MainWindow::on_startButton_clicked()
 
     /* Send cmd(0x1C) to finish upgrade process */
 }
-
