@@ -75,8 +75,20 @@ MainWindow::MainWindow(QWidget *parent)
     }
     QString baudRate = configSerial->value(DEFAULT_SERIAL_SECTION_NAME"baudRate").toString();
     setComboxDefalutIndex(ui->comBoxSpeed, baudRate);
+
+    // Connect serial read
+    connect(serial, &QSerialPort::readyRead, this, &MainWindow::readSerialData);
 }
 
+void MainWindow::readSerialData()
+{
+
+}
+
+int MainWindow::writeSerialData(char *data, unsigned int len)
+{
+    return serial->write(data, len);
+}
 MainWindow::~MainWindow()
 {
     delete configSerial;
@@ -143,6 +155,8 @@ void MainWindow::on_configApply_clicked()
 void MainWindow::on_startButton_clicked()
 {
     /* Set serial parameters */
+    // port
+    serial->setPort(QSerialPortInfo(ui->comBoxSerialPort->currentText()));
     // dataBits
     if(ui->comBoxDataBits->currentText() == "5")
     {
@@ -262,6 +276,10 @@ void MainWindow::on_startButton_clicked()
     qDebug() << "stopBits:" << serial->stopBits();
     qDebug() << "flowControl:" << serial->flowControl();
     qDebug() << "baudRate:" << serial->baudRate();
+
+    // Open serial port
+    serial->open(QIODevice::ReadWrite);
+
     /* Open firmware file */
     QString filePath = ui->documentPath->text();
         if(filePath.isEmpty()){
