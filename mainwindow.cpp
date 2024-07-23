@@ -27,7 +27,7 @@ int MainWindow::setComboxDefalutIndex(QComboBox *combox, const QString &str)
     index = combox->findText(str);
     if (index != -1) { // 确保找到了文本
         combox->setCurrentIndex(index);
-        qDebug() << "already find text" << endl;
+        qDebug() << "already find text:" << str << endl;
     } else {
         // 文本未找到的处理逻辑
         qDebug() << "Given text:" << str << "not found in the ComboBox.";
@@ -81,8 +81,12 @@ MainWindow::MainWindow(QWidget *parent)
     setComboxDefalutIndex(ui->comBoxParity, parity);
 
     // Set stop bits list
-    ui->comBoxStopBits->addItem("1");
-    ui->comBoxStopBits->addItem("2");
+    for(int i = 0; i < 2; i++)
+    {
+        int stopBits = 1 + i;
+        ui->comBoxStopBits->addItem(QString::number(stopBits),stopBits);
+        qDebug() << "Item" << i << "text:" << ui->comBoxStopBits->itemText(i) << "data:" << ui->comBoxStopBits->itemData(i).toInt();
+    }
     QString stopBits = configSerial->value("/defaultSerialConfig/stopBits").toString();
     setComboxDefalutIndex(ui->comBoxStopBits, stopBits);
 
@@ -163,6 +167,20 @@ void MainWindow::on_browseButton_clicked()
 //    file.close();
 }
 
+void MainWindow::on_documentPath_editingFinished()
+{
+    QString filePath = ui->documentPath->text();
+    if (filePath.isEmpty() || !QFile::exists(filePath)) {
+        QMessageBox::warning(this, tr("警告"), tr("文件路径无效或文件不存在！"));
+        return;
+    }
+
+    // 文件路径有效，可以在这里进一步处理文件
+    qDebug() << "File path entered: " << filePath;
+
+}
+
+
 void MainWindow::on_configApply_clicked()
 {
     // Set serialPort
@@ -188,9 +206,15 @@ void MainWindow::on_configApply_clicked()
         QMessageBox::critical(this, tr("error"), tr("Cannot set parity!"));
     }
 
+    // Set serialStopBits
+    int stopBits = ui->comBoxStopBits->currentData().toInt();
+    qDebug() << "stopBits is:" << stopBits;
 
-
-
+    if (serial->setStopBits(static_cast<QSerialPort::StopBits>(stopBits))) {
+        qDebug() << "stopBits has been set :" << stopBits;
+    } else {
+        QMessageBox::critical(this, tr("error"), tr("Cann't setting stopBits!"));
+    }
 
     // Set serialFlowControl
     QSerialPort::FlowControl flowControl = static_cast<QSerialPort::FlowControl>(ui->comBoxFlowControl->currentData().toInt());
@@ -211,3 +235,4 @@ void MainWindow::on_configApply_clicked()
         QMessageBox::critical(this, tr("error"), tr("Cannot set baudRate!"));
     }
 }
+

@@ -25,6 +25,8 @@ private slots:
     void on_browseButton_clicked();
     void on_configApply_clicked();
 
+    void on_documentPath_editingFinished();
+
 private:
     Ui::MainWindow *ui;
     QSerialPort *serial;
