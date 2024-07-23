@@ -23,6 +23,8 @@ int MainWindow::setComboxDefalutIndex(QComboBox *combox, const QString &str)
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , currentIndex(0)
+    , packetSize(256)
 {
     ui->setupUi(this);
 
@@ -256,12 +258,72 @@ void MainWindow::on_startButton_clicked()
     }
 
     qDebug() << "dataBits:" << serial->dataBits();
-
     qDebug() << "parity:" << serial->parity();
     qDebug() << "stopBits:" << serial->stopBits();
     qDebug() << "flowControl:" << serial->flowControl();
     qDebug() << "baudRate:" << serial->baudRate();
     /* Open firmware file */
+    QString filePath = ui->documentPath->text();
+        if(filePath.isEmpty()){
+            QMessageBox::warning(this,tr("警告"),tr("未选择文件！"));
+            return;
+        }
+
+        QFile firmwareFile;
+        firmwareFile.setFileName(filePath);
+        if(!firmwareFile.open(QIODevice::ReadOnly)){
+            QMessageBox::warning(this,tr("警告"),tr("无法打开固件文件！"));
+            return;
+        }
+
+        /* Read data from firmware */
+        QByteArray firmwareData = firmwareFile.readAll();
+        firmwareFile.close();
+        if(firmwareData.isEmpty()){
+            QMessageBox::warning(this,tr("警告"),tr("固件文件为空或者读取失败"));
+        }
+        qDebug() << "Firmare file loaded. size:" << firmwareData.size() << endl;
+
+        /* Send cmd(0x1A) to start upgrade */
+        QByteArray cmdStart;
+        cmdStart.append(0xAA);  // 起始符
+        cmdStart.append(0x55);  // 起始符
+        cmdStart.append(0x15);  // 地址码
+        cmdStart.append(0x1A);  // 命令字：开始升级
+        cmdStart.append(0x08);  // 数据长度
+
+        // 添加软件版本号和升级包大小
+        uint32_t version = 1;  // 示例版本号
+        uint32_t size = firmwareData.size();
+        cmdStart.append(reinterpret_cast<const char*>(&version), sizeof(version));
+        cmdStart.append(reinterpret_cast<const char*>(&size), sizeof(size));
+
+        serial->write(cmdStart);
+        if (serial->waitForBytesWritten(1000)) {
+            qDebug() << "Start upgrade command sent.";
+        } else {
+            QMessageBox::critical(this, tr("错误"), tr("发送开始升级命令失败！"));
+            return;
+        }
+
+        /* Read reply of starting cmd */
+        if (serial->waitForReadyRead(1000)) {
+            QByteArray response = serial->readAll();
+            if (!response.isEmpty() && static_cast<uint8_t>(response[0]) == 0x00) {
+                packetSize = response[1] << 8 | response[2];  // 获取协商的分段大小
+                qDebug() << "Start command acknowledged. Packet size:" << packetSize;
+                currentIndex = 0;
+                QTimer upgradeTimer;
+                upgradeTimer.start(100);  // 每100ms发送一块数据
+            } else {
+                qDebug() << "Start command not acknowledged. Retrying...";
+                //startUpgrade();
+
+
+            }
+        } else {
+            QMessageBox::critical(this, tr("错误"), tr("设备未响应开始命令！"));
+        }
 
     /* Read data from firmware */
 

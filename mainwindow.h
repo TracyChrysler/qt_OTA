@@ -7,6 +7,7 @@
 #include <QSettings>
 #include <QComboBox>
 #include <QFile>
+#include <QTimer>
 
 #define CONFIG_FILE "C:\\Users\\1\\Desktop\\qt\\qt_OTA\\config.ini"
 #define DEFAULT_SERIAL_SECTION_NAME "/defaultSerialConfig/"
@@ -36,5 +37,8 @@ private:
     Ui::MainWindow *ui;
     QSerialPort *serial;
     QSettings *configSerial;
+    int currentIndex;
+    int packetSize;
+    QTimer upgradeTimer;
 };
 #endif // MAINWINDOW_H
