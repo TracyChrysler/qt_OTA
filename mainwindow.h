@@ -6,6 +6,7 @@
 #include <QSerialPortInfo>
 #include <QSettings>
 #include <QComboBox>
+#include <QFile>
 
 #define CONFIG_FILE "C:\\Users\\1\\Desktop\\qt\\qt_OTA\\config.ini"
 #define DEFAULT_SERIAL_SECTION_NAME "/defaultSerialConfig/"

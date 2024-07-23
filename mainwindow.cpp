@@ -160,76 +160,107 @@ void MainWindow::on_startButton_clicked()
     }
 
     // parity
-    if(ui->comBoxParity->currentText() == "")
+    if(ui->comBoxParity->currentText() == "None")
     {
-        serial->(::);
+        serial->setParity(QSerialPort::NoParity);
     }
-    else if (ui->comBoxParity->currentText() == "")
+    else if (ui->comBoxParity->currentText() == "Odd")
     {
-        serial->(::);
+        serial->setParity(QSerialPort::OddParity);
     }
-    else if (ui->comBoxParity->currentText() == "")
+    else if (ui->comBoxParity->currentText() == "Even")
     {
-        serial->(::);
+        serial->setParity(QSerialPort::EvenParity);
     }
-    else if (ui->comBoxParity->currentText() == "")
+    else if (ui->comBoxParity->currentText() == "Mark")
     {
-        serial->(::);
+        serial->setParity(QSerialPort::MarkParity);
     }
-
-    // parity
-    if(ui->->currentText() == "")
+    else if (ui->comBoxParity->currentText() == "Space")
     {
-        serial->(::);
-    }
-    else if (ui->->currentText() == "")
-    {
-        serial->(::);
-    }
-    else if (ui->->currentText() == "")
-    {
-        serial->(::);
-    }
-    else if (ui->->currentText() == "")
-    {
-        serial->(::);
+        serial->setParity(QSerialPort::SpaceParity);
     }
 
-    // parity
-    if(ui->->currentText() == "")
+    // stopBits
+    if(ui->comBoxStopBits->currentText() == "1")
     {
-        serial->(::);
+        serial->setStopBits(QSerialPort::OneStop);
     }
-    else if (ui->->currentText() == "")
+    else if (ui->comBoxStopBits->currentText() == "2")
     {
-        serial->(::);
-    }
-    else if (ui->->currentText() == "")
-    {
-        serial->(::);
-    }
-    else if (ui->->currentText() == "")
-    {
-        serial->(::);
+        serial->setStopBits(QSerialPort::TwoStop);
     }
 
-    // parity
-    if(ui->->currentText() == "")
+    // flowControl
+    if(ui->comBoxFlowControl->currentText() == "None")
     {
-        serial->(::);
+        serial->setFlowControl(QSerialPort::NoFlowControl);
     }
-    else if (ui->->currentText() == "")
+    else if (ui->comBoxFlowControl->currentText() == "Xon/Xoff")
     {
-        serial->(::);
+        serial->setFlowControl(QSerialPort::SoftwareControl);
     }
-    else if (ui->->currentText() == "")
+    else if (ui->comBoxFlowControl->currentText() == "Rts/Sts")
     {
-        serial->(::);
+        serial->setFlowControl(QSerialPort::HardwareControl);
     }
-    else if (ui->->currentText() == "")
+    else if (ui->comBoxFlowControl->currentText() == "Dsr/Dtr")
     {
-        serial->(::);
+        serial->setFlowControl(QSerialPort::HardwareControl);
     }
+
+    // baud
+    if(ui->comBoxSpeed->currentText() == "1200")
+    {
+        serial->setBaudRate(QSerialPort::Baud1200);
+    }
+    else if (ui->comBoxSpeed->currentText() == "2400")
+    {
+        serial->setBaudRate(QSerialPort::Baud2400);
+    }
+    else if (ui->comBoxSpeed->currentText() == "4800")
+    {
+        serial->setBaudRate(QSerialPort::Baud4800);
+    }
+    else if (ui->comBoxSpeed->currentText() == "9600")
+    {
+        serial->setBaudRate(QSerialPort::Baud9600);
+    }
+    else if (ui->comBoxSpeed->currentText() == "19200")
+    {
+        serial->setBaudRate(QSerialPort::Baud19200);
+    }
+    else if (ui->comBoxSpeed->currentText() == "38400")
+    {
+        serial->setBaudRate(QSerialPort::Baud38400);
+    }
+    else if (ui->comBoxSpeed->currentText() == "57600")
+    {
+        serial->setBaudRate(QSerialPort::Baud57600);
+    }
+    else if (ui->comBoxSpeed->currentText() == "115200")
+    {
+        serial->setBaudRate(QSerialPort::Baud115200);
+    }
+    else if (ui->comBoxSpeed->currentText() == "460800")
+    {
+        serial->setBaudRate(460800);
+    }
+    else if (ui->comBoxSpeed->currentText() == "921600")
+    {
+        serial->setBaudRate(921600);
+    }
+    else if (ui->comBoxSpeed->currentText() == "230400")
+    {
+        serial->setBaudRate(230400);
+    }
+
+    qDebug() << "dataBits:" << serial->dataBits();
+
+    qDebug() << "parity:" << serial->parity();
+    qDebug() << "stopBits:" << serial->stopBits();
+    qDebug() << "flowControl:" << serial->flowControl();
+    qDebug() << "baudRate:" << serial->baudRate();
     /* Open firmware file */
 
     /* Read data from firmware */
