@@ -11,6 +11,7 @@ int MainWindow::setComboxDefalutIndex(QComboBox *combox, const QString &str)
     index = combox->findText(str);
     if (index != -1) { // 确保找到了文本
         combox->setCurrentIndex(index);
+        qDebug() << "already find the text:" << str << endl;
     } else {
         // 文本未找到的处理逻辑
         qDebug() << "Given text:" << str << "not found in the ComboBox.";
@@ -105,6 +106,19 @@ void MainWindow::on_browseButton_clicked()
 //    file.close();
 }
 
+void MainWindow::on_documentPath_editingFinished()
+{
+    QString filePath = ui->documentPath->text();
+    if (filePath.isEmpty() || !QFile::exists(filePath)) {
+        QMessageBox::warning(this, tr("警告"), tr("文件路径无效或文件不存在！"));
+        return;
+    }
+
+    // 文件路径有效，可以在这里进一步处理文件
+    qDebug() << "File path entered: " << filePath;
+
+}
+
 void MainWindow::on_configApply_clicked()
 {
     QString strDataBit =ui->comBoxDataBits->currentText();
@@ -144,3 +158,4 @@ void MainWindow::on_startButton_clicked()
 
     /* Send cmd(0x1C) to finish upgrade process */
 }
+

@@ -7,7 +7,7 @@
 #include <QSettings>
 #include <QComboBox>
 
-#define CONFIG_FILE "D:\\documents\\qt\\qt\\OTA_finally\\config.ini"
+#define CONFIG_FILE "C:\\Users\\1\\Desktop\\qt\\qt_OTA\\config.ini"
 #define DEFAULT_SERIAL_SECTION_NAME "/defaultSerialConfig/"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,6 +28,8 @@ private slots:
 
     // start update firmware
     void on_startButton_clicked();
+
+    void on_documentPath_editingFinished();
 
 private:
     Ui::MainWindow *ui;
