@@ -25,6 +25,7 @@ public:
     ~MainWindow();
     int setComboxDefalutIndex(QComboBox *combox, const QString &str);
     int writeSerialData(char *data, unsigned int len);
+    void setSerialParameters();
 
 private slots:
     void on_browseButton_clicked();

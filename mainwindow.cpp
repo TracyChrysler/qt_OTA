@@ -20,6 +20,133 @@ int MainWindow::setComboxDefalutIndex(QComboBox *combox, const QString &str)
     return 0;
 }
 
+void MainWindow::setSerialParameters()
+{
+    // port
+    serial->setPort(QSerialPortInfo(ui->comBoxSerialPort->currentText()));
+
+    // dataBits
+    if(ui->comBoxDataBits->currentText() == "5")
+    {
+        serial->setDataBits(QSerialPort::Data5);
+    }
+    else if (ui->comBoxDataBits->currentText() == "6")
+    {
+        serial->setDataBits(QSerialPort::Data6);
+    }
+    else if (ui->comBoxDataBits->currentText() == "7")
+    {
+        serial->setDataBits(QSerialPort::Data7);
+    }
+    else if (ui->comBoxDataBits->currentText() == "8")
+    {
+        serial->setDataBits(QSerialPort::Data8);
+    }
+
+    // parity
+    if(ui->comBoxParity->currentText() == "None")
+    {
+        serial->setParity(QSerialPort::NoParity);
+    }
+    else if (ui->comBoxParity->currentText() == "Odd")
+    {
+        serial->setParity(QSerialPort::OddParity);
+    }
+    else if (ui->comBoxParity->currentText() == "Even")
+    {
+        serial->setParity(QSerialPort::EvenParity);
+    }
+    else if (ui->comBoxParity->currentText() == "Mark")
+    {
+        serial->setParity(QSerialPort::MarkParity);
+    }
+    else if (ui->comBoxParity->currentText() == "Space")
+    {
+        serial->setParity(QSerialPort::SpaceParity);
+    }
+
+    // stopBits
+    if(ui->comBoxStopBits->currentText() == "1")
+    {
+        serial->setStopBits(QSerialPort::OneStop);
+    }
+    else if (ui->comBoxStopBits->currentText() == "2")
+    {
+        serial->setStopBits(QSerialPort::TwoStop);
+    }
+
+    // flowControl
+    if(ui->comBoxFlowControl->currentText() == "None")
+    {
+        serial->setFlowControl(QSerialPort::NoFlowControl);
+    }
+    else if (ui->comBoxFlowControl->currentText() == "Xon/Xoff")
+    {
+        serial->setFlowControl(QSerialPort::SoftwareControl);
+    }
+    else if (ui->comBoxFlowControl->currentText() == "Rts/Sts")
+    {
+        serial->setFlowControl(QSerialPort::HardwareControl);
+    }
+    else if (ui->comBoxFlowControl->currentText() == "Dsr/Dtr")
+    {
+        serial->setFlowControl(QSerialPort::HardwareControl);
+    }
+
+    // baud
+    if(ui->comBoxSpeed->currentText() == "1200")
+    {
+        serial->setBaudRate(QSerialPort::Baud1200);
+    }
+    else if (ui->comBoxSpeed->currentText() == "2400")
+    {
+        serial->setBaudRate(QSerialPort::Baud2400);
+    }
+    else if (ui->comBoxSpeed->currentText() == "4800")
+    {
+        serial->setBaudRate(QSerialPort::Baud4800);
+    }
+    else if (ui->comBoxSpeed->currentText() == "9600")
+    {
+        serial->setBaudRate(QSerialPort::Baud9600);
+    }
+    else if (ui->comBoxSpeed->currentText() == "19200")
+    {
+        serial->setBaudRate(QSerialPort::Baud19200);
+    }
+    else if (ui->comBoxSpeed->currentText() == "38400")
+    {
+        serial->setBaudRate(QSerialPort::Baud38400);
+    }
+    else if (ui->comBoxSpeed->currentText() == "57600")
+    {
+        serial->setBaudRate(QSerialPort::Baud57600);
+    }
+    else if (ui->comBoxSpeed->currentText() == "115200")
+    {
+        serial->setBaudRate(QSerialPort::Baud115200);
+    }
+    else if (ui->comBoxSpeed->currentText() == "460800")
+    {
+        serial->setBaudRate(460800);
+    }
+    else if (ui->comBoxSpeed->currentText() == "921600")
+    {
+        serial->setBaudRate(921600);
+    }
+    else if (ui->comBoxSpeed->currentText() == "230400")
+    {
+        serial->setBaudRate(230400);
+    }
+
+    qDebug() << "dataBits:" << serial->dataBits();
+    qDebug() << "parity:" << serial->parity();
+    qDebug() << "stopBits:" << serial->stopBits();
+    qDebug() << "flowControl:" << serial->flowControl();
+    qDebug() << "baudRate:" << serial->baudRate() << endl;
+
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -144,7 +271,7 @@ void MainWindow::on_configApply_clicked()
     qDebug() << "strParit:" << strParit;
     qDebug() << "strStopBit:" << strStopBit;
     qDebug() << "strFlowControl:" << strFlowControl;
-    qDebug() << "strSpeed:" << strSpeed;
+    qDebug() << "strSpeed:" << strSpeed << endl;
     configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"dataBits", strDataBit);
     configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"parity", strParit);
     configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"stopBit", strStopBit);
@@ -155,127 +282,7 @@ void MainWindow::on_configApply_clicked()
 void MainWindow::on_startButton_clicked()
 {
     /* Set serial parameters */
-    // port
-    serial->setPort(QSerialPortInfo(ui->comBoxSerialPort->currentText()));
-    // dataBits
-    if(ui->comBoxDataBits->currentText() == "5")
-    {
-        serial->setDataBits(QSerialPort::Data5);
-    }
-    else if (ui->comBoxDataBits->currentText() == "6")
-    {
-        serial->setDataBits(QSerialPort::Data6);
-    }
-    else if (ui->comBoxDataBits->currentText() == "7")
-    {
-        serial->setDataBits(QSerialPort::Data7);
-    }
-    else if (ui->comBoxDataBits->currentText() == "8")
-    {
-        serial->setDataBits(QSerialPort::Data8);
-    }
-
-    // parity
-    if(ui->comBoxParity->currentText() == "None")
-    {
-        serial->setParity(QSerialPort::NoParity);
-    }
-    else if (ui->comBoxParity->currentText() == "Odd")
-    {
-        serial->setParity(QSerialPort::OddParity);
-    }
-    else if (ui->comBoxParity->currentText() == "Even")
-    {
-        serial->setParity(QSerialPort::EvenParity);
-    }
-    else if (ui->comBoxParity->currentText() == "Mark")
-    {
-        serial->setParity(QSerialPort::MarkParity);
-    }
-    else if (ui->comBoxParity->currentText() == "Space")
-    {
-        serial->setParity(QSerialPort::SpaceParity);
-    }
-
-    // stopBits
-    if(ui->comBoxStopBits->currentText() == "1")
-    {
-        serial->setStopBits(QSerialPort::OneStop);
-    }
-    else if (ui->comBoxStopBits->currentText() == "2")
-    {
-        serial->setStopBits(QSerialPort::TwoStop);
-    }
-
-    // flowControl
-    if(ui->comBoxFlowControl->currentText() == "None")
-    {
-        serial->setFlowControl(QSerialPort::NoFlowControl);
-    }
-    else if (ui->comBoxFlowControl->currentText() == "Xon/Xoff")
-    {
-        serial->setFlowControl(QSerialPort::SoftwareControl);
-    }
-    else if (ui->comBoxFlowControl->currentText() == "Rts/Sts")
-    {
-        serial->setFlowControl(QSerialPort::HardwareControl);
-    }
-    else if (ui->comBoxFlowControl->currentText() == "Dsr/Dtr")
-    {
-        serial->setFlowControl(QSerialPort::HardwareControl);
-    }
-
-    // baud
-    if(ui->comBoxSpeed->currentText() == "1200")
-    {
-        serial->setBaudRate(QSerialPort::Baud1200);
-    }
-    else if (ui->comBoxSpeed->currentText() == "2400")
-    {
-        serial->setBaudRate(QSerialPort::Baud2400);
-    }
-    else if (ui->comBoxSpeed->currentText() == "4800")
-    {
-        serial->setBaudRate(QSerialPort::Baud4800);
-    }
-    else if (ui->comBoxSpeed->currentText() == "9600")
-    {
-        serial->setBaudRate(QSerialPort::Baud9600);
-    }
-    else if (ui->comBoxSpeed->currentText() == "19200")
-    {
-        serial->setBaudRate(QSerialPort::Baud19200);
-    }
-    else if (ui->comBoxSpeed->currentText() == "38400")
-    {
-        serial->setBaudRate(QSerialPort::Baud38400);
-    }
-    else if (ui->comBoxSpeed->currentText() == "57600")
-    {
-        serial->setBaudRate(QSerialPort::Baud57600);
-    }
-    else if (ui->comBoxSpeed->currentText() == "115200")
-    {
-        serial->setBaudRate(QSerialPort::Baud115200);
-    }
-    else if (ui->comBoxSpeed->currentText() == "460800")
-    {
-        serial->setBaudRate(460800);
-    }
-    else if (ui->comBoxSpeed->currentText() == "921600")
-    {
-        serial->setBaudRate(921600);
-    }
-    else if (ui->comBoxSpeed->currentText() == "230400")
-    {
-        serial->setBaudRate(230400);
-    }
-
-    qDebug() << "dataBits:" << serial->dataBits();
-    qDebug() << "parity:" << serial->parity();
-    qDebug() << "stopBits:" << serial->stopBits();
-    qDebug() << "flowControl:" << serial->flowControl();
-    qDebug() << "baudRate:" << serial->baudRate();
+    setSerialParameters();
 
     // Open serial port
     if(!serial->open(QIODevice::ReadWrite))
@@ -291,66 +298,65 @@ void MainWindow::on_startButton_clicked()
 
     /* Open firmware file */
     QString filePath = ui->documentPath->text();
-        if(filePath.isEmpty()){
-            QMessageBox::warning(this,tr("警告"),tr("未选择文件！"));
-            return;
-        }
+    if(filePath.isEmpty()){
+        QMessageBox::warning(this,tr("警告"),tr("未选择文件！"));
+        return;
+    }
 
-        QFile firmwareFile;
-        firmwareFile.setFileName(filePath);
-        if(!firmwareFile.open(QIODevice::ReadOnly)){
-            QMessageBox::warning(this,tr("警告"),tr("无法打开固件文件！"));
-            return;
-        }
+    QFile firmwareFile;
+    firmwareFile.setFileName(filePath);
+    if(!firmwareFile.open(QIODevice::ReadOnly)){
+        QMessageBox::warning(this,tr("警告"),tr("无法打开固件文件！"));
+        return;
+    }
 
-        /* Read data from firmware */
-        QByteArray firmwareData = firmwareFile.readAll();
-        firmwareFile.close();
-        if(firmwareData.isEmpty()){
-            QMessageBox::warning(this,tr("警告"),tr("固件文件为空或者读取失败"));
-        }
-        qDebug() << "Firmare file loaded. size:" << firmwareData.size() << endl;
+    /* Read data from firmware */
+    QByteArray firmwareData = firmwareFile.readAll();
+    firmwareFile.close();
+    if(firmwareData.isEmpty()){
+        QMessageBox::warning(this,tr("警告"),tr("固件文件为空或者读取失败"));
+    }
+    qDebug() << "Firmare file loaded. size:" << firmwareData.size() << endl;
 
-        /* Send cmd(0x1A) to start upgrade */
-        QByteArray cmdStart;
-        cmdStart.append(0xAA);  // 起始符
-        cmdStart.append(0x55);  // 起始符
-        cmdStart.append(0x15);  // 地址码
-        cmdStart.append(0x1A);  // 命令字：开始升级
-        cmdStart.append(0x08);  // 数据长度
+    /* Send cmd(0x1A) to start upgrade */
+    QByteArray cmdStart;
+    cmdStart.append(0xAA);  // 起始符
+    cmdStart.append(0x55);  // 起始符
+    cmdStart.append(0x15);  // 地址码
+    cmdStart.append(0x1A);  // 命令字：开始升级
+    cmdStart.append(0x08);  // 数据长度
 
-        // 添加软件版本号和升级包大小
-        uint32_t version = 1;  // 示例版本号
-        uint32_t size = firmwareData.size();
-        cmdStart.append(reinterpret_cast<const char*>(&version), sizeof(version));
-        cmdStart.append(reinterpret_cast<const char*>(&size), sizeof(size));
+    // 添加软件版本号和升级包大小
+    uint32_t version = 1;  // 示例版本号
+    uint32_t size = firmwareData.size();
+    cmdStart.append(reinterpret_cast<const char*>(&version), sizeof(version));
+    cmdStart.append(reinterpret_cast<const char*>(&size), sizeof(size));
 
-        serial->write(cmdStart);
-        if (serial->waitForBytesWritten(1000)) {
-            qDebug() << "Start upgrade command sent.";
+    serial->write(cmdStart);
+    if (serial->waitForBytesWritten(1000)) {
+        qDebug() << "Start upgrade command sent.";
+    } else {
+        QMessageBox::critical(this, tr("错误"), tr("发送开始升级命令失败！"));
+        return;
+    }
+
+    /* Read reply of starting cmd */
+    if (serial->waitForReadyRead(1000)) {
+        QByteArray response = serial->readAll();
+        if (!response.isEmpty() && static_cast<uint8_t>(response[0]) == 0x00) {
+            packetSize = response[1] << 8 | response[2];  // 获取协商的分段大小
+            qDebug() << "Start command acknowledged. Packet size:" << packetSize;
+            currentIndex = 0;
+            QTimer upgradeTimer;
+            upgradeTimer.start(100);  // 每100ms发送一块数据
         } else {
-            QMessageBox::critical(this, tr("错误"), tr("发送开始升级命令失败！"));
-            return;
+            qDebug() << "Start command not acknowledged. Retrying...";
+            //startUpgrade();
+
         }
-
-        /* Read reply of starting cmd */
-        if (serial->waitForReadyRead(1000)) {
-            QByteArray response = serial->readAll();
-            if (!response.isEmpty() && static_cast<uint8_t>(response[0]) == 0x00) {
-                packetSize = response[1] << 8 | response[2];  // 获取协商的分段大小
-                qDebug() << "Start command acknowledged. Packet size:" << packetSize;
-                currentIndex = 0;
-                QTimer upgradeTimer;
-                upgradeTimer.start(100);  // 每100ms发送一块数据
-            } else {
-                qDebug() << "Start command not acknowledged. Retrying...";
-                //startUpgrade();
-
-
-            }
-        } else {
-            QMessageBox::critical(this, tr("错误"), tr("设备未响应开始命令！"));
-        }
+    } else {
+        QMessageBox::critical(this, tr("错误"), tr("设备未响应开始命令！"));
+    }
 
     /* Read data from firmware */
 
