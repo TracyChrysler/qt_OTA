@@ -262,19 +262,19 @@ void MainWindow::on_documentPath_editingFinished()
 
 void MainWindow::on_configApply_clicked()
 {
-    QString strDataBit =ui->comBoxDataBits->currentText();
+    QString strDataBits =ui->comBoxDataBits->currentText();
     QString strParit =ui->comBoxParity->currentText();
-    QString strStopBit =ui->comBoxStopBits->currentText();
+    QString strStopBits =ui->comBoxStopBits->currentText();
     QString strFlowControl =ui->comBoxFlowControl->currentText();
     QString strSpeed =ui->comBoxSpeed->currentText();
-    qDebug() << "strDataBit:" << strDataBit;
+    qDebug() << "strDataBits:" << strDataBits;
     qDebug() << "strParit:" << strParit;
-    qDebug() << "strStopBit:" << strStopBit;
+    qDebug() << "strStopBits:" << strStopBits;
     qDebug() << "strFlowControl:" << strFlowControl;
     qDebug() << "strSpeed:" << strSpeed << endl;
-    configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"dataBits", strDataBit);
+    configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"dataBits", strDataBits);
     configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"parity", strParit);
-    configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"stopBit", strStopBit);
+    configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"stopBits", strStopBits);
     configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"flowControl", strFlowControl);
     configSerial->setValue(DEFAULT_SERIAL_SECTION_NAME"baudRate", strSpeed);
 }
